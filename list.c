@@ -1,40 +1,7 @@
-// List data type
-// You may modify this file as needed; however,
-// you may *NOT* modify the function prototypes or constant names.
-
-#ifndef _LIST_H_
-#define _LIST_H_
 #include <stdbool.h>
+#include "list.h"
 
-#define LIST_SUCCESS 0
-#define LIST_FAIL -1
-
-typedef struct Node_s Node;
-struct Node_s {
-    Node* node_prev;
-    Node* node_next;
-    void* item;
-};
-
-enum ListOutOfBounds {
-    LIST_OOB_START,
-    LIST_OOB_END
-};
-typedef struct List_s List;
-struct List_s{
-    Node* head;
-    Node* current;
-    Node* tail;
-    int counter;
-};
-
-// Maximum number of unique lists the system can support
-// (You may modify this, but reset the value to 10 when handing in your assignment)
-#define LIST_MAX_NUM_HEADS 10
-
-// Maximum total number of nodes (statically allocated) to be shared across all lists
-// (You may modify this, but reset the value to 100 when handing in your assignment)
-#define LIST_MAX_NUM_NODES 100
+static int listCounter = 0;
 
 // General Error Handling:
 // Client code is assumed never to call these functions with a NULL List pointer, or 
@@ -124,5 +91,3 @@ void List_free(List* pList, FREE_FN pItemFreeFn);
 // the first node in the list (if any).
 typedef bool (*COMPARATOR_FN)(void* pItem, void* pComparisonArg);
 void* List_search(List* pList, COMPARATOR_FN pComparator, void* pComparisonArg);
-
-#endif
