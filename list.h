@@ -18,14 +18,20 @@ struct Node_s {
 
 enum ListOutOfBounds {
     LIST_OOB_START,
+    LIST_BOUNDED,
+    LIST_EMPTY,
     LIST_OOB_END
 };
 typedef struct List_s List;
 struct List_s{
-    Node* head;
+    Node* first;
     Node* current;
-    Node* tail;
+    Node* last;
+    enum ListOutOfBounds bound_status;
     int counter;
+
+    List* prev_list;
+    List* next_list;
 };
 
 // Maximum number of unique lists the system can support
@@ -89,7 +95,7 @@ int List_append(List* pList, void* pItem);
 // Returns 0 on success, -1 on failure.
 int List_prepend(List* pList, void* pItem);
 
-// Return current item and take it out of pList. Make the next item the current one.
+// Return current item and take it out of pList. Make the next_list item the current one.
 // If the current pointer is before the start of the pList, or beyond the end of the pList,
 // then do not change the pList and return NULL.
 void* List_remove(List* pList);
